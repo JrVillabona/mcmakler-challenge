@@ -1,5 +1,6 @@
 import { Given, When, Then } from 'cypress-cucumber-preprocessor/steps'
-import FormAdPage from '../../page-objects/FormAdPage'
+import ListViewPage from '../../../support/page-objects/ListViewPage'
+import FormAdPage from '../../../support/page-objects/FormAdPage'
 
 When('I press the escape key', () => {
 	cy.get('#input_0').type('{esc}')

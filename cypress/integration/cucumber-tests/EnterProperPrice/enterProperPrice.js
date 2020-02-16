@@ -1,5 +1,6 @@
 import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps'
-import FormAdPage from '../../page-objects/FormAdPage'
+import ListViewPage from '../../../support/page-objects/ListViewPage'
+import FormAdPage from '../../../support/page-objects/FormAdPage'
 
 When('I enter {int} in the price', price => {
 	FormAdPage.fillPrice(price)

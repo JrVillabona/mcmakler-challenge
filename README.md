@@ -13,8 +13,8 @@ First of all you need to have [NodeJS](https://nodejs.org/es/), [Chrome](https:/
 Clone the repository project:
 
 ```
-git clone https://github.com/JrVillabona/login-Facebook-bdd.git
-cd login-Facebook-bdd
+git clone https://github.com/JrVillabona/mcmakler-challenge.git
+cd mcmakler-challenge
 ```
 
 Install the dependencies:
@@ -25,30 +25,29 @@ npm install
 
 ## Execution
 
-In order to execute the tests, you just need to execute the following command:
+In order to execute the tests, you just need to execute the following commands.
+
+If you prefer in headless mode:
 
 ```
 npm run test
 ```
 
-Or with the Cypress console and execute the tests:
+Or if you want to perform with the Cypress console:
 
 ```
 npm run cypress:open
 ```
 
-Also in headless-mode with:
-
-```
-npm run cypress:run
-```
+Then select whether you want to run a particular feature or if you prefer to run all the features. Select the browser in which you want to run the tests, remember that Cypress supports Chrome, Edge, Firefox and Electron. After that, click on **Run all specs**.
 
 ## Generals
 
-- In the folder `cypress/integration` are files who define steps for the features.
+- In the folder `cypress/integration` there are two folders:
+  `cypress/integration/common` contains the steps that are common and used in various features.
+  `cypress/integration/cucumber-tests` contains the features that uses descriptive names (.features) and the folders with each of the steps.
 - In file `cypress.json` there are config vars.
-- In file `cypress/integration/page-objects` there are page of project.
-- The files `.feature` there are in folder `integration` and uses descriptive names.
+- In file `cypress/support/page-objects` there are page of project.
 
 ## Documentation
 

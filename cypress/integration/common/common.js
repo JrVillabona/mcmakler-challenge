@@ -1,6 +1,6 @@
 import { defineStep } from 'cypress-cucumber-preprocessor/steps'
-import FormAdPage from '../../page-objects/FormAdPage'
-import ListViewPage from '../../page-objects/ListViewPage'
+import ListViewPage from '../../support/page-objects/ListViewPage'
+import FormAdPage from '../../support/page-objects/FormAdPage'
 
 defineStep('I want to wait {int} milliseconds', time => {
 	cy.wait(time)
