@@ -1,0 +1,43 @@
+{
+	"name": "mcmakler-challenge",
+	"version": "1.0.0",
+	"description": "McMakler test with Cypress and Cucumber",
+	"main": "index.js",
+	"scripts": {
+		"cy:open": "cypress open",
+		"cy:run": "cypress run",
+		"cy:run:chrome": "cypress run --browser chrome",
+		"cy:run:firefox": "cypress run --browser firefox",
+		"cy:run:edge": "cypress run --browser edge",
+		"test": "cypress run --spec \"**/*.feature\"",
+		"test:all": "cypress run --spec \"**/*.features\""
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/JrVillabona/mcmakler-challenge.git"
+	},
+	"keywords": [
+		"Cypress",
+		"Cucumber",
+		"Automation",
+		"McMakler"
+	],
+	"author": "Julian R Villabona A",
+	"license": "ISC",
+	"bugs": {
+		"url": "https://github.com/JrVillabona/mcmakler-challenge/issues"
+	},
+	"homepage": "https://github.com/JrVillabona/mcmakler-challenge#readme",
+	"dependencies": {
+		"cypress-cucumber-preprocessor": "^2.0.1",
+		"cypress-xpath": "^1.4.0",
+		"prettier": "^1.19.1"
+	},
+	"cypress-cucumber-preprocessor": {
+		"nonGlobalStepDefinitions": true
+	},
+	"devDependencies": {
+		"cypress": "^4.0.2",
+		"cypress-plugin-tab": "^1.0.5"
+	}
+}
