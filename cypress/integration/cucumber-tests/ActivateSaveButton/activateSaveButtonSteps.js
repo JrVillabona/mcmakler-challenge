@@ -1,17 +1,5 @@
-import { Given, When, Then, And } from 'cypress-cucumber-preprocessor/steps'
-import ListViewPage from '../../../support/page-objects/ListViewPage'
+import { When, Then } from 'cypress-cucumber-preprocessor/steps'
 import FormAdPage from '../../../support/page-objects/FormAdPage'
-
-Given('I am on the advertisement form', () => {
-	ListViewPage.visit()
-	ListViewPage.clickOnNewAdButton()
-	FormAdPage.isVisible()
-})
-
-When('I fill out the form only with {string} and {int}', (name, price) => {
-	FormAdPage.fillName(name)
-	FormAdPage.fillPrice(price)
-})
 
 When('I fill out the form only with {string}', name => {
 	FormAdPage.fillName(name)

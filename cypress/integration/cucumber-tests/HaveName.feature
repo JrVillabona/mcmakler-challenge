@@ -6,3 +6,7 @@ Given I go to the advertisement form view
 
 Scenario: The name is required
 Then I see that the name field is required
+
+Scenario: The required message is showed
+When I write "test" but then clear the name field
+Then I see a required error in name

@@ -1,4 +1,4 @@
-import { defineStep } from 'cypress-cucumber-preprocessor/steps'
+import { Before, defineStep } from 'cypress-cucumber-preprocessor/steps'
 import ListViewPage from '../../support/page-objects/ListViewPage'
 import FormAdPage from '../../support/page-objects/FormAdPage'
 
@@ -16,6 +16,10 @@ defineStep('I see {string} in the URL', url => {
 
 defineStep('I reload the browser', () => {
 	cy.reload()
+})
+
+Before({ tags: '@clearData' }, () => {
+	ListViewPage.clearTheAdvertisementList()
 })
 
 defineStep('I am on the list view', () => {
@@ -43,6 +47,11 @@ defineStep('I fill out the form with {string}, {string}, {int} and {int}', (name
 	FormAdPage.fillPrice(price)
 })
 
+defineStep('I fill out the form only with {string} and {int}', (name, price) => {
+	FormAdPage.fillName(name)
+	FormAdPage.fillPrice(price)
+})
+
 defineStep('I click on Save button', () => {
 	FormAdPage.saveAd()
 })
@@ -55,11 +64,16 @@ defineStep('I am on the advertisement form', () => {
 	FormAdPage.isVisible()
 })
 
+defineStep('I see the toast List changed', () => {
+	ListViewPage.changeListIsVisible()
+})
+
 defineStep('I see the ad in the list with its {string}, {string}, {int} and {int}', (name, street, rooms, price) => {
 	ListViewPage.containsNewAdd(name, street, rooms, price)
 })
 
-defineStep('Create an Advertisement', () => {
+defineStep('I create an Advertisement', () => {
+	ListViewPage.clearTheAdvertisementList()
 	cy.request({
 		method: 'POST',
 		url: '/api/advertisements',
@@ -72,8 +86,21 @@ defineStep('Create an Advertisement', () => {
 	})
 })
 
+defineStep('I update an Advertisement', () => {
+	cy.request({
+		method: 'PUT',
+		url: '/api/advertisements/*',
+		body: {
+			name: 'Cool',
+			street: 'Castropol',
+			rooms: 1,
+			price: '9999999'
+		}
+	})
+})
+
 defineStep('Create Data Advertisements', () => {
-	cy.request('/api/advertisements/db/drop?confirm=y')
+	ListViewPage.clearTheAdvertisementList()
 	cy.request({
 		method: 'POST',
 		url: '/api/advertisements',
@@ -100,7 +127,7 @@ defineStep('Create Data Advertisements', () => {
 		body: {
 			name: 'Attractive',
 			street: 'Street 45',
-			rooms: 2,
+			rooms: 1,
 			price: '2333000'
 		}
 	})
@@ -110,7 +137,7 @@ defineStep('Create Data Advertisements', () => {
 		body: {
 			name: 'Beautiful',
 			street: 'Street 45',
-			rooms: 2,
+			rooms: 4,
 			price: '1500000'
 		}
 	})

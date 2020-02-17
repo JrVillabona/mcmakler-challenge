@@ -2,7 +2,7 @@ Feature: Activation of the save button
 As a user, when I'm on the advertisement form view, the save button is not active as long the form is not valid.
 
 Background:
-Given I am on the advertisement form
+Given I go to the advertisement form view
 
 Scenario: The save button is not activated when the form is empty
 Then I should not see the save button active

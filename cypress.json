@@ -1,5 +1,6 @@
 {
 	"baseUrl": "https://admin-advertisement.herokuapp.com/",
+	"video": false,
 	"watchForFileChanges": false,
 	"defaultCommandTimeout": 8000,
 	"execTimeout": 60000,

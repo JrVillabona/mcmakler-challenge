@@ -1,20 +1,38 @@
+const COLUMNS = '.md-column'
+const TOAST = '.md-toast-content'
+const RELOAD = '.md-action'
+const NEW_AD_BUTTON = '.al-add__button'
+const FIRST_AD = '(//td[@class="md-cell ng-binding"])[1]'
+const SORT_BUTTON = '.md-sort-icon'
+const NAMES_ELEMENTS = 'tr td:nth-child(1)'
+const ENTRIES_LIST = '(//td[@class="md-cell ng-binding"])'
+
 class ListViewPage {
 	static visit() {
 		cy.visit('/')
+		this.isVisible()
 	}
 
 	static isVisible() {
-		cy.get('.md-body').should('be.visible)')
+		cy.get(COLUMNS).should('be.visible')
 		cy.url().should('be.include', '/advertisements')
 	}
 
+	static changeListIsVisible() {
+		cy.get(TOAST).should('be.visible')
+	}
+
+	static clickOnReload() {
+		cy.get(RELOAD).click()
+	}
+
 	static clickOnNewAdButton() {
-		cy.xpath('//md-icon[contains(.,"add_circle_outline")]').click()
+		cy.get(NEW_AD_BUTTON).click()
 		cy.url().should('include', '/new')
 	}
 
 	static clickOnAd() {
-		cy.xpath('(//td[@class="md-cell ng-binding"])[1]').click()
+		cy.xpath(FIRST_AD).click()
 		cy.url().should('include', '/edit')
 	}
 
@@ -41,11 +59,11 @@ class ListViewPage {
 	}
 
 	static sortAscending() {
-		cy.get('.md-sort-icon').click()
+		cy.get(SORT_BUTTON).click()
 	}
 
 	static sortDescending() {
-		cy.get('.md-sort-icon').dblclick()
+		cy.get(SORT_BUTTON).dblclick()
 	}
 
 	static containsNewAdd(name, street, rooms, price) {
@@ -56,28 +74,35 @@ class ListViewPage {
 	}
 
 	static isSortByNameAscending() {
-		cy.get('tr td:nth-child(1)').then($elements => {
+		cy.get(NAMES_ELEMENTS).then($elements => {
 			let strings = [...$elements].map($el => $el.textContent.trim())
 			cy.wrap(strings).should('have.ordered.members', strings.sort())
 		})
 	}
 
 	static isSortByNameDescending() {
-		cy.get('tr td:nth-child(1)').then($elements => {
+		cy.get(NAMES_ELEMENTS).then($elements => {
 			let strings = [...$elements].map($el => $el.textContent.trim())
 			cy.wrap(strings).should('have.ordered.members', strings.reverse())
 		})
 	}
 
 	static seeEntriesList() {
-		cy.xpath('(//td[@class="md-cell ng-binding"])').should('be.visible')
+		cy.xpath(ENTRIES_LIST).should('be.visible')
 	}
 
-	// static validateSuccessMessage(message) {
-	// 	cy.get('.md-toast-text')
-	// 		.should('be.visible')
-	// 		.should('have.text', message)
-	// }
+	static clearTheAdvertisementList() {
+		cy.request('/api/advertisements/db/drop?confirm=y')
+	}
+
+	static validateGetRequest() {
+		cy.server()
+		cy.route('GET', 'api/advertisements').as('getAdvertisement')
+		this.clickOnReload()
+		cy.wait('@getAdvertisement')
+			.its('status')
+			.should('eq', 200)
+	}
 }
 
 export default ListViewPage
