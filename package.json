@@ -10,7 +10,8 @@
 		"cy:run:firefox": "cypress run --browser firefox",
 		"cy:run:edge": "cypress run --browser edge",
 		"test": "cypress run --spec \"**/*.feature\"",
-		"test:all": "cypress run --spec \"**/*.features\""
+		"test:all": "cypress run --spec \"**/*.features\"",
+		"cy:run:dashboard": "cypress run --record --key 59659ec6-8feb-4965-b223-d4878b3006d9"
 	},
 	"repository": {
 		"type": "git",
@@ -29,15 +30,15 @@
 	},
 	"homepage": "https://github.com/JrVillabona/mcmakler-challenge#readme",
 	"dependencies": {
-		"cypress-cucumber-preprocessor": "^2.0.1",
-		"cypress-xpath": "^1.4.0",
-		"prettier": "^1.19.1"
+		"cypress-cucumber-preprocessor": "^2.5.5",
+		"cypress-xpath": "^1.6.0",
+		"prettier": "^2.1.1"
 	},
 	"cypress-cucumber-preprocessor": {
 		"nonGlobalStepDefinitions": true
 	},
 	"devDependencies": {
-		"cypress": "^4.0.2",
+		"cypress": "^5.1.0",
 		"cypress-plugin-tab": "^1.0.5"
 	}
 }
